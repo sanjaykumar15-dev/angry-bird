@@ -179,8 +179,7 @@
     .gallery-item:hover { transform: scale(1.06) rotate(-1deg); }
     .gallery-item img {
       width: 100%; height: 100%;
-      /* object-fit: cover;      fills container properly */
-      object-position: center; /* keeps image centered */
+      object-position: center;
       display: block;
     }
 
@@ -218,7 +217,7 @@
       font-weight: 600;
       animation: slideIn .5s ease both;
     }
-    .reason-item span { font-size: 1.5rem; }
+    .reason-item span { font-size: 1.5rem; flex-shrink: 0; }
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(-40px); }
       to   { opacity: 1; transform: translateX(0); }
@@ -256,15 +255,21 @@
       margin-bottom: 40px;
       max-width: 500px;
     }
+
+    /* ── BUTTON WRAP: key fix for mobile ── */
     .btn-wrap {
       display: flex;
       gap: 20px;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+      /* FIX: enough height so No button has room to escape without overlapping Yes */
+      min-height: 160px;
+      width: 100%;
+      max-width: 500px;
       position: relative;
-      min-height: 80px;
     }
+
     .btn {
       padding: 16px 40px;
       border-radius: 50px;
@@ -279,6 +284,8 @@
       background: linear-gradient(135deg, var(--rose), var(--lilac));
       color: white;
       box-shadow: 0 8px 25px rgba(255,61,127,0.4);
+      position: relative;
+      z-index: 2;
     }
     #yes-btn:hover {
       transform: scale(1.12);
@@ -288,8 +295,15 @@
       background: white;
       color: #aaa;
       box-shadow: 0 4px 14px rgba(0,0,0,.08);
+      /* FIX: absolute so it can escape without pushing Yes button */
       position: absolute;
-      transition: left .15s, top .15s, right .15s, bottom .15s;
+      /* Start at a safe offset below Yes so they don't overlap by default */
+      top: 80px;
+      left: 50%;
+      transform: translateX(80px);
+      transition: transform .25s cubic-bezier(.22,1.5,.4,1), top .25s cubic-bezier(.22,1.5,.4,1), left .25s cubic-bezier(.22,1.5,.4,1);
+      white-space: nowrap;
+      z-index: 1;
     }
 
     /* ── YES SCREEN ── */
@@ -360,42 +374,156 @@
       0%,100% { transform: scale(1) rotate(-3deg); }
       50%      { transform: scale(1.15) rotate(3deg); }
     }
+
     .music-control {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 1000;
-}
-
-
-#musicBtn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff6b9d, #ffa07a);
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(255, 107, 157, 0.5);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#musicBtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.7);
-}
-
-#musicBtn.playing {
-    animation: pulse 1.5s ease infinite;
-}
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+    }
+    #musicBtn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b9d, #ffa07a);
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(255, 107, 157, 0.5);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #musicBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(255, 107, 157, 0.7);
+    }
+    #musicBtn.playing {
+      animation: pulse 1.5s ease infinite;
+    }
 
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--cream); }
     ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
+
+    /* ════════════════════════════════════
+       MOBILE RESPONSIVE FIXES
+    ════════════════════════════════════ */
+    @media (max-width: 600px) {
+
+      /* Hero */
+      .hero-photo {
+        width: 150px;
+        height: 150px;
+      }
+      .hero-title {
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
+        line-height: 1.3;
+      }
+      .hero-date {
+        font-size: 0.95rem;
+        padding: 8px 18px;
+      }
+
+      /* Wishes */
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .wish-card {
+        padding: 22px 18px;
+      }
+
+      /* Gallery — 2 columns on mobile */
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      /* Reasons */
+      .reason-item {
+        border-radius: 20px;
+        padding: 14px 18px;
+        font-size: 0.9rem;
+      }
+
+      /* Section titles */
+      .section-title {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+        margin-bottom: 24px;
+      }
+
+      /* Sections padding */
+      section {
+        padding: 50px 16px;
+      }
+
+      /* Proposal */
+      .proposal-photo {
+        width: 130px;
+        height: 130px;
+      }
+      .proposal-funny {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+        padding: 0 8px;
+      }
+
+      /* Button wrap — more vertical room for No to escape */
+      .btn-wrap {
+        min-height: 200px;
+        max-width: 340px;
+      }
+      .btn {
+        padding: 14px 32px;
+        font-size: 1rem;
+      }
+      /* No button starts clearly below Yes on mobile */
+      #no-btn {
+        top: 90px;
+        left: 50%;
+        transform: translateX(40px);
+      }
+
+      /* Yes screen photos */
+      #yes-screen .hero-photo {
+        width: 130px !important;
+        height: 130px !important;
+      }
+      #yes-screen div[style*="display: flex"] {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      /* Music button smaller on mobile */
+      .music-control {
+        bottom: 1rem;
+        right: 1rem;
+      }
+      #musicBtn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
+      }
+
+      /* Cake */
+      .cake-wrap {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .hero-photo {
+        width: 130px;
+        height: 130px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -416,7 +544,6 @@
 
 <!-- ░░ HERO ░░ -->
 <section id="hero">
-  <!-- 👉 REPLACE src with your girlfriend's photo -->
   <img class="hero-photo"
        src="./images/Snapchat-1819155099.jpg"
        alt="My Love"/>
@@ -467,7 +594,6 @@
 <section id="gallery">
   <h2 class="section-title">📸 Sweet Memories</h2>
   <div class="gallery-grid">
-    <!-- 👉 REPLACE these with your real photos together -->
     <div class="gallery-item">
       <img src="./images/1 (5).jpg" alt="Memory 1"/>
       <div class="overlay">💖</div>
@@ -492,16 +618,20 @@
       <img src="./images/13.JPG" alt="Memory 6"/>
       <div class="overlay">🦋</div>
     </div>
-        <div class="gallery-item">
+    <div class="gallery-item">
       <img src="./images/12.JPG" alt="Memory 6"/>
       <div class="overlay">🦋</div>
     </div>
-        <div class="gallery-item">
+    <div class="gallery-item">
       <img src="./images/1 (6).jpg" alt="Memory 6"/>
       <div class="overlay">🦋</div>
     </div>
-        <div class="gallery-item">
+    <div class="gallery-item">
       <img src="./images/1 (10).jpg" alt="Memory 6"/>
+      <div class="overlay">🦋</div>
+    </div>
+       <div class="gallery-item">
+      <img src="./images/1 (11).jpg" alt="Memory 6"/>
       <div class="overlay">🦋</div>
     </div>
   </div>
@@ -513,15 +643,9 @@
   <div class="reasons-list">
     <div class="reason-item" style="animation-delay:.1s"><span>😤</span> Even your "angry" face is the cutest thing I've ever seen 🐦</div>
     <div class="reason-item" style="animation-delay:.2s"><span>🎯</span> You aim straight for my heart every single time, no miss!</div>
-    <!-- <div class="reason-item" style="animation-delay:.3s"><span>💥</span> Your energy blows me away — in the absolute best way possible</div> -->
-    <!-- <div class="reason-item" style="animation-delay:.4s"><span>🌸</span> Underneath the "angry" act is the softest, sweetest soul ever</div> -->
-    <!-- <div class="reason-item" style="animation-delay:.5s"><span>🏆</span> You're stronger and braver than you ever give yourself credit for</div> -->
-    <!-- <div class="reason-item" style="animation-delay:.6s"><span>😂</span> Your laugh could fix any bad day — it's literally my medicine</div> -->
     <div class="reason-item" style="animation-delay:.7s"><span>🌟</span> You're genuinely the rarest, most legendary bird in my world 😁</div>
     <div class="reason-item" style="animation-delay:.8s"><span>📵</span> You don't reply for hours… but I still check my phone every 2 minutes like a fool 😭</div>
     <div class="reason-item" style="animation-delay:.9s"><span>🐢</span> Your replies are slower than my WiFi at 2AM — but I wait every single time 😤💕</div>
-    <!-- <div class="reason-item" style="animation-delay:1s"><span>💀</span> You left me on "seen" for 3 hours once… I wrote a whole diary entry about it 😔</div> -->
-    <!-- <div class="reason-item" style="animation-delay:1.1s"><span>🙄</span> You say "you don't like me" but then give me THAT smile — make it make sense! 😩💖</div> -->
     <div class="reason-item" style="animation-delay:1.2s"><span>😒</span> "I don't have time for you" — yet here I am, making time for you 24/7 like a simp</div>
     <div class="reason-item" style="animation-delay:1.3s"><span>🤡</span> You ignore me, I panic. You reply, I smile like an idiot. You own me completely 😅</div>
     <div class="reason-item" style="animation-delay:1.4s"><span>📞</span> One "hey" from you after hours of silence and I instantly forget I was even upset 😤➡️🥰</div>
@@ -531,7 +655,6 @@
 <!-- ░░ PROPOSAL ░░ -->
 <section id="proposal">
   <div class="cake-wrap">🎂</div>
-  <!-- 👉 REPLACE with a cute photo of both of you -->
   <img class="proposal-photo"
        src="./images/1 (3).jpg"
        alt="Us Together"/>
@@ -555,15 +678,14 @@
   <h2 class="yes-title">YAY! She Said YES!! 🎉</h2>
   <p class="yes-subtitle">I knew it! I knew it! The smartest decision of your life! 😜💖</p>
   <br>
-  <!-- 👉 REPLACE with a favourite photo of her/both -->
- <div style="display: flex;">
-   <img class="hero-photo"
-       src="./images/1 (1).jpg"
-       alt="My Queen" style="width:180px;height:180px;border-color:#ffd700;"/>
-         <img class="hero-photo"
-       src="./images/1 (2).jpg"
-       alt="My Queen" style="width:180px;height:180px;border-color:#ffd700;"/>
- </div>
+  <div style="display: flex;">
+    <img class="hero-photo"
+         src="./images/1 (1).jpg"
+         alt="My Queen" style="width:180px;height:180px;border-color:#ffd700;"/>
+    <img class="hero-photo"
+         src="./images/1 (2).jpg"
+         alt="My Queen" style="width:180px;height:180px;border-color:#ffd700;"/>
+  </div>
   <p style="margin-top:22px;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--lilac)">
     You are MY person. Forever &amp; Always. 🌹
   </p>
@@ -571,15 +693,16 @@
     From this birthday onwards, every single day is going to be even more magical because we are official! 💫🎀
   </p>
 </section>
-    <!-- Music Control -->
-    <div class="music-control">
-        <button id="musicBtn" onclick="toggleMusic()">🔊</button>
-    </div>
 
-    <!-- Audio Element -->
-    <audio id="birthdayMusic" loop>
-        <source src="./happy-birthday.mp3" type="audio/mpeg">
-    </audio>
+<!-- Music Control -->
+<div class="music-control">
+  <button id="musicBtn" onclick="toggleMusic()">🔊</button>
+</div>
+
+<!-- Audio Element -->
+<audio id="birthdayMusic" loop>
+  <source src="./happy-birthday.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   /* ── FLOATING HEARTS ── */
@@ -601,18 +724,37 @@
   setInterval(spawnHeart, 400);
   for (let i = 0; i < 15; i++) spawnHeart();
 
-  /* ── SPARKLE CURSOR TRAIL ── */
+  /* ── SPARKLE TRAIL — works on both mouse AND touch ── */
   const sparkles = ['✨','💖','🌸','⭐','💫','🦋'];
-  document.addEventListener('mousemove', e => {
-    if (Math.random() > .6) return;
+
+  function createSparkle(x, y) {
     const s = document.createElement('div');
     s.className = 'sparkle';
     s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
-    s.style.left = e.clientX + 'px';
-    s.style.top  = e.clientY + 'px';
+    s.style.left = x + 'px';
+    s.style.top  = y + 'px';
     document.body.appendChild(s);
     setTimeout(() => s.remove(), 800);
+  }
+
+  // Desktop mouse
+  document.addEventListener('mousemove', e => {
+    if (Math.random() > .6) return;
+    createSparkle(e.clientX, e.clientY);
   });
+
+  // Mobile touch — FIX: listen to touchmove for continuous trail
+  document.addEventListener('touchmove', e => {
+    if (Math.random() > .5) return; // slightly more frequent on touch
+    const touch = e.touches[0];
+    createSparkle(touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  // Also spawn a sparkle on tap/touchstart for instant feedback
+  document.addEventListener('touchstart', e => {
+    const touch = e.touches[0];
+    createSparkle(touch.clientX, touch.clientY);
+  }, { passive: true });
 
   /* ── SCROLL FADE-IN FOR CARDS ── */
   const observer = new IntersectionObserver(entries => {
@@ -636,17 +778,23 @@
     "Stop chasing it, just click YES! 😄",
   ];
   let tauntIdx = 0;
+
   function runAway() {
     const btn = document.getElementById('no-btn');
     const wrap = document.getElementById('btn-wrap');
     const wRect = wrap.getBoundingClientRect();
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const maxX = Math.min(vw - 120, wRect.width + 200);
-    const maxY = Math.min(vh - 80, 300);
-    const rx = (Math.random() - 0.5) * maxX;
-    const ry = (Math.random() - 0.5) * maxY;
-    btn.style.transform = `translate(${rx}px, ${ry}px)`;
-    btn.style.transition = 'transform .25s cubic-bezier(.22,1.5,.4,1)';
+
+    // Clamp escape range so No never flies off-screen
+    const maxX = Math.min(wRect.width / 2 - 40, 120);
+    const maxY = Math.min(wRect.height - 90, 100);
+
+    const rx = (Math.random() - 0.5) * 2 * maxX;
+    const ry = 60 + Math.random() * maxY; // always stay below yes-btn
+
+    btn.style.left  = '50%';
+    btn.style.transform = `translate(calc(-50% + ${rx}px), ${ry}px)`;
+    btn.style.top = '0px';
+
     document.getElementById('no-taunt').textContent = taunts[tauntIdx % taunts.length];
     tauntIdx++;
   }
@@ -701,43 +849,41 @@
     draw();
   }
 
-// Toggle music
-function toggleMusic() {
+  // Toggle music
+  function toggleMusic() {
     if (musicPlaying) {
-        pauseMusic();
+      pauseMusic();
     } else {
-        playMusic();
+      playMusic();
     }
-}
+  }
 
-// Play music
-function playMusic() {
+  // Play music
+  function playMusic() {
     const music = document.getElementById('birthdayMusic');
     const musicBtn = document.getElementById('musicBtn');
-    
     music.play().then(() => {
-        musicPlaying = true;
-        musicBtn.textContent = '🔊';
-        musicBtn.classList.add('playing');
+      musicPlaying = true;
+      musicBtn.textContent = '🔊';
+      musicBtn.classList.add('playing');
     }).catch(error => {
-        console.log('Music autoplay prevented. User interaction required.');
+      console.log('Music autoplay prevented. User interaction required.');
     });
-}
+  }
 
-// Pause music
-function pauseMusic() {
+  // Pause music
+  function pauseMusic() {
     const music = document.getElementById('birthdayMusic');
     const musicBtn = document.getElementById('musicBtn');
-    
     music.pause();
     musicPlaying = false;
     musicBtn.textContent = '🔇';
     musicBtn.classList.remove('playing');
-}
+  }
 
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     playMusic();
-});
+  });
 </script>
 </body>
 </html>
