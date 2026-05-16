@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday My Angry Bird 🐦‍🔥💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink: #ff6b9d;
+      --rose: #ff3d7f;
+      --lilac: #c56cd6;
+      --cream: #fff8f9;
+      --gold: #ffd700;
+      --soft: #ffe0ec;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--cream);
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><text y='20' font-size='20'>💖</text></svg>"), auto;
+    }
+
+    /* ── ANGRY BIRD SVG ── */
+    .angry-bird-svg {
+      margin: 14px 0 6px;
+      animation: birdBounce 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 12px 24px rgba(180,20,0,0.4));
+    }
+    @keyframes birdBounce {
+      0%,100% { transform: translateY(0) rotate(-3deg) scale(1); }
+      50%      { transform: translateY(-16px) rotate(3deg) scale(1.04); }
+    }
+    /* ── FLOATING HEARTS BACKGROUND ── */
+    #hearts-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      bottom: -60px;
+      font-size: 1.4rem;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: linear-gradient(160deg, #ffe0ec 0%, #fce4ff 50%, #ffe0ec 100%);
+      text-align: center;
+    }
+    .hero-photo {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid white;
+      box-shadow: 0 0 0 4px var(--pink), 0 20px 50px rgba(255,107,157,0.4);
+      animation: photoFloat 3s ease-in-out infinite;
+      margin-bottom: 28px;
+    }
+    @keyframes photoFloat {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    .hero-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      color: var(--rose);
+      text-shadow: 2px 4px 12px rgba(255,61,127,0.25);
+      animation: popIn .8s cubic-bezier(.22,1.5,.4,1) both;
+    }
+    .hero-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: var(--lilac);
+      margin-top: 10px;
+      animation: popIn 1s .2s cubic-bezier(.22,1.5,.4,1) both;
+    }
+    .hero-date {
+      margin-top: 18px;
+      background: white;
+      border-radius: 50px;
+      padding: 10px 28px;
+      font-size: 1.1rem;
+      color: var(--rose);
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(255,107,157,0.2);
+      animation: popIn 1s .4s cubic-bezier(.22,1.5,.4,1) both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.5) translateY(30px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .scroll-hint {
+      margin-top: 50px;
+      font-size: .9rem;
+      color: #b98daa;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(8px); }
+    }
+
+    /* ── WISHES ── */
+    #wishes {
+      background: linear-gradient(160deg, #fff0f7 0%, #f7e8ff 100%);
+    }
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--rose);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+      max-width: 900px;
+      width: 100%;
+    }
+    .wish-card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(255,107,157,0.12);
+      transition: transform .3s, box-shadow .3s;
+      animation: fadeUp .6s ease both;
+    }
+    .wish-card:hover {
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: 0 16px 40px rgba(255,107,157,0.22);
+    }
+    .wish-card .emoji { font-size: 2.8rem; margin-bottom: 14px; display: block; }
+    .wish-card h3 { font-size: 1.1rem; color: var(--rose); margin-bottom: 8px; font-weight: 700; }
+    .wish-card p  { font-size: .95rem; color: #777; line-height: 1.6; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: linear-gradient(160deg, #fce4ff 0%, #ffe0ec 100%);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 700px;
+      width: 100%;
+    }
+    .gallery-item {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      box-shadow: 0 6px 20px rgba(255,61,127,0.15);
+      transition: transform .3s;
+      position: relative;
+    }
+    .gallery-item:hover { transform: scale(1.06) rotate(-1deg); }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(255,61,127,.45), transparent);
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: 10px;
+      font-size: 1.3rem;
+      opacity: 0; transition: opacity .3s;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+
+    /* ── REASONS ── */
+    #reasons {
+      background: linear-gradient(160deg, #fff0f7 0%, #f0f4ff 100%);
+    }
+    .reasons-list {
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .reason-item {
+      background: white;
+      border-radius: 50px;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 4px 18px rgba(255,107,157,0.1);
+      font-size: 1rem;
+      color: #555;
+      font-weight: 600;
+      animation: slideIn .5s ease both;
+    }
+    .reason-item span { font-size: 1.5rem; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── PROPOSAL ── */
+    #proposal {
+      background: linear-gradient(160deg, #ffe0ec 0%, #fce4ff 50%, #ffe0ec 100%);
+      text-align: center;
+    }
+    .proposal-photo {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 0 0 4px var(--lilac), 0 15px 40px rgba(197,108,214,0.35);
+      margin-bottom: 28px;
+      animation: spin3d 6s ease-in-out infinite;
+    }
+    @keyframes spin3d {
+      0%,100% { transform: perspective(400px) rotateY(0deg); }
+      50%      { transform: perspective(400px) rotateY(15deg); }
+    }
+    .proposal-q {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--rose);
+      margin-bottom: 14px;
+      text-shadow: 2px 4px 12px rgba(255,61,127,0.2);
+    }
+    .proposal-funny {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--lilac);
+      margin-bottom: 40px;
+      max-width: 500px;
+    }
+    .btn-wrap {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+      min-height: 80px;
+    }
+    .btn {
+      padding: 16px 40px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    #yes-btn {
+      background: linear-gradient(135deg, var(--rose), var(--lilac));
+      color: white;
+      box-shadow: 0 8px 25px rgba(255,61,127,0.4);
+    }
+    #yes-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 12px 35px rgba(255,61,127,0.55);
+    }
+    #no-btn {
+      background: white;
+      color: #aaa;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+      position: absolute;
+      transition: left .15s, top .15s, right .15s, bottom .15s;
+    }
+
+    /* ── YES SCREEN ── */
+    #yes-screen {
+      display: none;
+      background: linear-gradient(160deg, #ffe0ec, #fce4ff);
+      text-align: center;
+    }
+    .yes-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 7vw, 4rem);
+      color: var(--rose);
+      animation: popIn .7s cubic-bezier(.22,1.5,.4,1) both;
+    }
+    .yes-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: var(--lilac);
+      margin-top: 12px;
+      animation: popIn .7s .15s cubic-bezier(.22,1.5,.4,1) both;
+    }
+    .confetti-burst {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ── SPARKLE TRAIL ── */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.1rem;
+      z-index: 9999;
+      animation: sparkleAnim .8s forwards;
+    }
+    @keyframes sparkleAnim {
+      0%   { opacity: 1; transform: scale(1) translateY(0); }
+      100% { opacity: 0; transform: scale(0) translateY(-30px); }
+    }
+
+    /* ── RIBBON BANNER ── */
+    .ribbon {
+      background: linear-gradient(90deg, var(--rose), var(--lilac), var(--rose));
+      color: white;
+      font-family: 'Pacifico', cursive;
+      font-size: 1rem;
+      padding: 12px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    .ribbon-inner {
+      display: inline-block;
+      animation: ribbonScroll 18s linear infinite;
+    }
+    @keyframes ribbonScroll {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* ── CAKE ANIMATION ── */
+    .cake-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      animation: cakePulse 1.5s ease-in-out infinite;
+      margin: 10px 0;
+    }
+    @keyframes cakePulse {
+      0%,100% { transform: scale(1) rotate(-3deg); }
+      50%      { transform: scale(1.15) rotate(3deg); }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- ░░ FLOATING HEARTS BACKGROUND ░░ -->
+<div id="hearts-bg"></div>
+
+<!-- ░░ RIBBON ░░ -->
+<div class="ribbon">
+  <span class="ribbon-inner">
+    🐦 Happy Birthday My Angry Bird 🐦 &nbsp;&nbsp;&nbsp;
+    💖 You Are My Favourite Person 💖 &nbsp;&nbsp;&nbsp;
+    🎯 19 May — Launch Day For My Heart 🎯 &nbsp;&nbsp;&nbsp;
+    🐷 No Pigs Allowed, Only Cake 🎂 &nbsp;&nbsp;&nbsp;
+    ✨ Forever &amp; Always Yours, Angry Bird ✨ &nbsp;&nbsp;&nbsp;
+    🌟 Best. Bird. Ever. 🌟 &nbsp;&nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- ░░ HERO ░░ -->
+<section id="hero">
+  <!-- 👉 REPLACE src with your girlfriend's photo -->
+  <img class="hero-photo"
+       src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop&crop=face"
+       alt="My Love"/>
+  <h1 class="hero-title">Happy Birthday, Angry Bird! 🐦💥</h1>
+  <p class="hero-subtitle">The feistiest, cutest bird that ever crash-landed in my heart 🌸</p>
+  <div class="hero-date">🗓️ 19 May — Your Launch Day 🚀</div>
+  <!-- MOVIE-STYLE RED ANGRY BIRD + BIRTHDAY HAT -->
+  <div class="angry-bird-svg">
+    <svg viewBox="0 0 200 230" width="160" height="184" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bodyGrad" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#ff6030"/>
+          <stop offset="55%" stop-color="#d92b0a"/>
+          <stop offset="100%" stop-color="#8b1200"/>
+        </radialGradient>
+        <radialGradient id="bellyGrad" cx="50%" cy="40%" r="55%">
+          <stop offset="0%" stop-color="#ffe8b0"/>
+          <stop offset="100%" stop-color="#d4a030"/>
+        </radialGradient>
+        <radialGradient id="eyeGrad" cx="35%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="100%" stop-color="#d8e8f0"/>
+        </radialGradient>
+        <radialGradient id="pupilGrad" cx="35%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#4a3060"/>
+          <stop offset="100%" stop-color="#0d0820"/>
+        </radialGradient>
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="3" dy="6" stdDeviation="5" flood-color="#7a0000" flood-opacity="0.4"/>
+        </filter>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- SHADOW ON GROUND -->
+      <ellipse cx="100" cy="218" rx="48" ry="9" fill="#c0280a" opacity="0.25"/>
+
+      <!-- BIRTHDAY HAT -->
+      <polygon points="100,8 68,72 132,72" fill="url(#hatGrad)" stroke="#cc2060" stroke-width="1.5"/>
+      <defs>
+        <linearGradient id="hatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff3d7f"/>
+          <stop offset="100%" stop-color="#c56cd6"/>
+        </linearGradient>
+      </defs>
+      <!-- hat stripes -->
+      <line x1="84" y1="40" x2="116" y2="40" stroke="white" stroke-width="2.5" opacity="0.5"/>
+      <line x1="76" y1="56" x2="124" y2="56" stroke="white" stroke-width="2.5" opacity="0.5"/>
+      <!-- hat pompom -->
+      <circle cx="100" cy="10" r="7" fill="#ffd700" filter="url(#glow)"/>
+      <circle cx="100" cy="10" r="4" fill="white" opacity="0.6"/>
+      <!-- hat band -->
+      <rect x="68" y="68" width="64" height="9" rx="4" fill="#ff6b9d"/>
+      <!-- hat dots -->
+      <circle cx="80" cy="29" r="3" fill="#ffd700" opacity="0.8"/>
+      <circle cx="120" cy="33" r="2.5" fill="white" opacity="0.7"/>
+      <circle cx="95" cy="50" r="2" fill="#ffd700" opacity="0.7"/>
+
+      <!-- MAIN BODY — large round shape -->
+      <ellipse cx="100" cy="148" rx="70" ry="72" fill="url(#bodyGrad)" filter="url(#softShadow)"/>
+
+      <!-- BODY HIGHLIGHT -->
+      <ellipse cx="80" cy="115" rx="22" ry="16" fill="white" opacity="0.12" transform="rotate(-20,80,115)"/>
+
+      <!-- WING LEFT -->
+      <ellipse cx="34" cy="162" rx="18" ry="11" fill="#b82008" transform="rotate(-30,34,162)"/>
+      <ellipse cx="30" cy="170" rx="14" ry="8" fill="#8b1200" transform="rotate(-20,30,170)"/>
+      <!-- WING RIGHT -->
+      <ellipse cx="166" cy="162" rx="18" ry="11" fill="#b82008" transform="rotate(30,166,162)"/>
+      <ellipse cx="170" cy="170" rx="14" ry="8" fill="#8b1200" transform="rotate(20,170,170)"/>
+
+      <!-- BELLY (cream patch) -->
+      <ellipse cx="100" cy="168" rx="36" ry="30" fill="url(#bellyGrad)"/>
+      <!-- belly texture lines -->
+      <path d="M88,158 Q100,153 112,158" fill="none" stroke="#c8903a" stroke-width="1.2" opacity="0.6"/>
+      <path d="M84,165 Q100,160 116,165" fill="none" stroke="#c8903a" stroke-width="1.2" opacity="0.6"/>
+
+      <!-- TAIL FEATHERS -->
+      <ellipse cx="162" cy="198" rx="10" ry="22" fill="#a01800" transform="rotate(40,162,198)"/>
+      <ellipse cx="152" cy="205" rx="8" ry="19" fill="#c02008" transform="rotate(25,152,205)"/>
+      <ellipse cx="143" cy="208" rx="7" ry="16" fill="#a01800" transform="rotate(10,143,208)"/>
+
+      <!-- EYEBROW BASE (thick, movie-style angry) -->
+      <!-- Left brow — thick dark wedge -->
+      <path d="M48,110 L82,118 L82,124 L46,116 Z" fill="#1a0a00"/>
+      <!-- Right brow -->
+      <path d="M152,110 L118,118 L118,124 L154,116 Z" fill="#1a0a00"/>
+      <!-- Brow highlights -->
+      <path d="M50,111 L80,119" stroke="#3a1800" stroke-width="1" opacity="0.5"/>
+
+      <!-- EYE WHITES (large, oval) -->
+      <ellipse cx="74" cy="132" rx="22" ry="24" fill="url(#eyeGrad)" stroke="#e0d0c8" stroke-width="1"/>
+      <ellipse cx="126" cy="132" rx="22" ry="24" fill="url(#eyeGrad)" stroke="#e0d0c8" stroke-width="1"/>
+
+      <!-- PUPILS -->
+      <ellipse cx="78" cy="136" rx="13" ry="14" fill="url(#pupilGrad)"/>
+      <ellipse cx="130" cy="136" rx="13" ry="14" fill="url(#pupilGrad)"/>
+
+      <!-- IRIS (brown ring) -->
+      <ellipse cx="78" cy="136" rx="9" ry="10" fill="none" stroke="#5a3010" stroke-width="2" opacity="0.4"/>
+      <ellipse cx="130" cy="136" rx="9" ry="10" fill="none" stroke="#5a3010" stroke-width="2" opacity="0.4"/>
+
+      <!-- EYE SHINE (movie-style dual highlights) -->
+      <ellipse cx="84" cy="128" rx="5" ry="6" fill="white" opacity="0.95"/>
+      <circle cx="82" cy="142" r="2.5" fill="white" opacity="0.6"/>
+      <ellipse cx="136" cy="128" rx="5" ry="6" fill="white" opacity="0.95"/>
+      <circle cx="134" cy="142" r="2.5" fill="white" opacity="0.6"/>
+
+      <!-- EYELIDS (movie — half-lid angry look) -->
+      <path d="M52,122 Q74,112 96,122" fill="#c02808" stroke="#8b1000" stroke-width="1"/>
+      <path d="M104,122 Q126,112 148,122" fill="#c02808" stroke="#8b1000" stroke-width="1"/>
+
+      <!-- BEAK — movie style hooked top beak + lower jaw -->
+      <!-- Upper beak -->
+      <path d="M86,154 Q100,147 114,154 L108,168 Q100,175 92,168 Z" fill="#f5a020"/>
+      <path d="M86,154 Q100,147 114,154 L110,161 Q100,157 90,161 Z" fill="#ffc040"/>
+      <!-- Beak ridge/line -->
+      <path d="M88,155 Q100,149 112,155" fill="none" stroke="#d07000" stroke-width="1.5"/>
+      <!-- Lower beak -->
+      <path d="M90,167 Q100,175 110,167 L108,173 Q100,180 92,173 Z" fill="#e09010"/>
+      <!-- Nostril dots -->
+      <circle cx="94" cy="156" r="2" fill="#c07000" opacity="0.7"/>
+      <circle cx="106" cy="156" r="2" fill="#c07000" opacity="0.7"/>
+
+      <!-- HEAD FEATHER TUFT — movie style spiky -->
+      <path d="M100,78 Q94,62 88,48 Q96,58 100,54 Q104,58 112,48 Q106,62 100,78Z" fill="#c02008"/>
+      <path d="M100,78 Q90,60 82,42 Q93,56 100,50" fill="#a01800" opacity="0.6"/>
+      <path d="M100,78 Q110,60 118,42 Q107,56 100,50" fill="#a01800" opacity="0.6"/>
+      <!-- feather highlight -->
+      <path d="M100,78 Q97,65 96,54" fill="none" stroke="#ff5030" stroke-width="1.5" opacity="0.5"/>
+
+      <!-- CHEEK BLUSH (cute touch for the girlfriend) -->
+      <ellipse cx="57" cy="150" rx="12" ry="7" fill="#ff6080" opacity="0.28"/>
+      <ellipse cx="143" cy="150" rx="12" ry="7" fill="#ff6080" opacity="0.28"/>
+
+      <!-- TINY PINK HEART (floating near beak) -->
+      <g transform="translate(155,118) scale(0.8)">
+        <path d="M10,6 C10,3 7,0 4,2 C1,0 -2,3 -2,6 C-2,9 10,17 10,17 C10,17 22,9 22,6 C22,3 19,0 16,2 C13,0 10,3 10,6Z" fill="#ff3d7f" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+  <div class="scroll-hint">Scroll down for a surprise 👇💕</div>
+</section>
+
+<!-- ░░ BIRTHDAY WISHES ░░ -->
+<section id="wishes">
+  <h2 class="section-title">🎁 Birthday Wishes For My Angry Bird 🐦</h2>
+  <div class="cards-grid">
+    <div class="wish-card" style="animation-delay:.1s">
+      <span class="emoji">🐦💥</span>
+      <h3>To My Angry Bird</h3>
+      <p>You might be called "Angry Bird" but every time I see you, my heart just flies! You're the cutest chaos I've ever loved. 💖</p>
+    </div>
+    <div class="wish-card" style="animation-delay:.2s">
+      <span class="emoji">🎯</span>
+      <h3>Bullseye of My Heart</h3>
+      <p>Just like in the game, you launched straight into my heart and completely destroyed all my defences. 10/10, no regrets! 😂💕</p>
+    </div>
+    <div class="wish-card" style="animation-delay:.3s">
+      <span class="emoji">💫</span>
+      <h3>Feisty & Fabulous</h3>
+      <p>You may be "angry" in name, but you're the sweetest, most fabulous bird in the entire universe. Don't ever change! ✨</p>
+    </div>
+    <div class="wish-card" style="animation-delay:.4s">
+      <span class="emoji">🌈</span>
+      <h3>Infinite Happiness</h3>
+      <p>Angry Bird, I wish you a birthday filled with all the joy, cake, laughter and love you truly deserve! 💝</p>
+    </div>
+    <div class="wish-card" style="animation-delay:.5s">
+      <span class="emoji">🏆</span>
+      <h3>Rare & Legendary</h3>
+      <p>In a world full of piggy problems, you're my legendary golden bird. You make everything better just by existing! 🌍🐦</p>
+    </div>
+    <div class="wish-card" style="animation-delay:.6s">
+      <span class="emoji">🍰</span>
+      <h3>Sweet Angry Bird</h3>
+      <p>May your birthday be as sweet and irresistible as you are — yes, even sweeter than your "angry" face! 😋😤💖</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ GALLERY ░░ -->
+<section id="gallery">
+  <h2 class="section-title">📸 Our Sweet Memories</h2>
+  <div class="gallery-grid">
+    <!-- 👉 REPLACE these with your real photos together -->
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=400&fit=crop" alt="Memory 1"/>
+      <div class="overlay">💖</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1520584346083-0f87a0c5c9a2?w=400&h=400&fit=crop" alt="Memory 2"/>
+      <div class="overlay">🌸</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=400&fit=crop" alt="Memory 3"/>
+      <div class="overlay">✨</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=400&fit=crop" alt="Memory 4"/>
+      <div class="overlay">💕</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&h=400&fit=crop" alt="Memory 5"/>
+      <div class="overlay">🎀</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1541199249251-f713e6145474?w=400&h=400&fit=crop" alt="Memory 6"/>
+      <div class="overlay">🦋</div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ REASONS ░░ -->
+<section id="reasons">
+  <h2 class="section-title">💝 Why I Love My Angry Bird</h2>
+  <div class="reasons-list">
+    <div class="reason-item" style="animation-delay:.1s"><span>😤</span> Even your "angry" face is the cutest thing I've ever seen 🐦</div>
+    <div class="reason-item" style="animation-delay:.2s"><span>🎯</span> You aim straight for my heart every single time, no miss!</div>
+    <div class="reason-item" style="animation-delay:.3s"><span>💥</span> Your energy blows me away — in the absolute best way possible</div>
+    <div class="reason-item" style="animation-delay:.4s"><span>🌸</span> Underneath the "angry" act is the softest, sweetest soul ever</div>
+    <div class="reason-item" style="animation-delay:.5s"><span>🏆</span> You're stronger and braver than you ever give yourself credit for</div>
+    <div class="reason-item" style="animation-delay:.6s"><span>😂</span> Your laugh could fix any bad day — it's literally my medicine</div>
+    <div class="reason-item" style="animation-delay:.7s"><span>🌟</span> You're genuinely the rarest, most legendary bird in my world 💖</div>
+  </div>
+</section>
+
+<!-- ░░ PROPOSAL ░░ -->
+<section id="proposal">
+  <!-- Mini Red bird in proposal -->
+  <div class="cake-wrap">
+    <svg viewBox="0 0 200 200" width="90" height="90" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="b2" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#ff6030"/><stop offset="100%" stop-color="#8b1200"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="100" cy="190" rx="40" ry="7" fill="#8b1200" opacity="0.2"/>
+      <ellipse cx="100" cy="118" rx="58" ry="60" fill="url(#b2)"/>
+      <ellipse cx="100" cy="138" rx="30" ry="24" fill="#f5c842"/>
+      <!-- eyes -->
+      <ellipse cx="82" cy="103" rx="17" ry="19" fill="white"/>
+      <ellipse cx="118" cy="103" rx="17" ry="19" fill="white"/>
+      <circle cx="86" cy="107" r="10" fill="#1a0820"/>
+      <circle cx="122" cy="107" r="10" fill="#1a0820"/>
+      <ellipse cx="91" cy="100" rx="4" ry="5" fill="white"/>
+      <ellipse cx="127" cy="100" rx="4" ry="5" fill="white"/>
+      <!-- brows -->
+      <path d="M65,91 L96,99 L96,104 L63,96 Z" fill="#1a0a00"/>
+      <path d="M135,91 L104,99 L104,104 L137,96 Z" fill="#1a0a00"/>
+      <!-- beak -->
+      <path d="M87,122 Q100,116 113,122 L107,134 Q100,140 93,134 Z" fill="#f5a020"/>
+      <path d="M87,122 Q100,116 113,122 L109,128 Q100,124 91,128 Z" fill="#ffc040"/>
+      <!-- head tufts -->
+      <path d="M100,62 Q93,48 87,34 Q95,46 100,42 Q105,46 113,34 Q107,48 100,62Z" fill="#c02008"/>
+      <!-- blush -->
+      <ellipse cx="66" cy="120" rx="10" ry="6" fill="#ff6080" opacity="0.3"/>
+      <ellipse cx="134" cy="120" rx="10" ry="6" fill="#ff6080" opacity="0.3"/>
+      <!-- party hat -->
+      <polygon points="100,32 80,65 120,65" fill="#ff3d7f" stroke="#c56cd6" stroke-width="1"/>
+      <circle cx="100" cy="33" r="5" fill="#ffd700"/>
+      <rect x="80" y="61" width="40" height="7" rx="3" fill="#ff6b9d"/>
+    </svg>
+    <span style="font-size:2rem">🎂</span>
+  </div>
+  <!-- 👉 REPLACE with a cute photo of both of you -->
+  <img class="proposal-photo"
+       src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=400&fit=crop"
+       alt="Us Together"/>
+  <h2 class="proposal-q">So… Angry Bird… 🥺🐦</h2>
+  <p class="proposal-funny">
+    I asked the slingshot of my heart where to aim… <br>
+    it pointed straight at you. 🎯💘<br><br>
+    You've already destroyed all my walls like a legendary bird —<br>
+    so why not make it <strong>official</strong>? 😤💖<br><br>
+    <em style="font-size:1rem;color:#999">(The pigs have no chance, it's just us 🐷❌)</em><br><br>
+    Will you be <strong>Mine</strong>, Angry Bird? 🌹
+  </p>
+  <div class="btn-wrap" id="btn-wrap">
+    <button class="btn" id="yes-btn" onclick="sayYes()">Yes, Obviously! 💖</button>
+    <button class="btn" id="no-btn" onmouseenter="runAway()" ontouchstart="runAway()">No 😅</button>
+  </div>
+  <p id="no-taunt" style="margin-top:20px;color:#c56cd6;font-family:'Dancing Script',cursive;font-size:1.2rem;min-height:30px;"></p>
+</section>
+
+<!-- ░░ YES SCREEN ░░ -->
+<section id="yes-screen">
+  <canvas class="confetti-burst" id="confetti-canvas"></canvas>
+  <div class="cake-wrap">🥳</div>
+  <h2 class="yes-title">YAY! Angry Bird Said YES!! 🎉🐦💖</h2>
+  <p class="yes-subtitle">BULLSEYE! The best shot I've ever taken! 🎯😄</p>
+  <br>
+  <!-- 👉 REPLACE with a favourite photo of her/both -->
+  <img class="hero-photo"
+       src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop&crop=face"
+       alt="My Angry Bird Queen" style="width:180px;height:180px;border-color:#ffd700;"/>
+  <p style="margin-top:22px;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--lilac)">
+    My Angry Bird. My Person. Forever. 🌹🐦
+  </p>
+  <p style="margin-top:10px;font-size:1rem;color:#b98daa;max-width:460px;text-align:center;line-height:1.7">
+    From this birthday onwards, the pigs don't stand a chance — because we're an unstoppable team! 🐷❌ 💕
+  </p>
+</section>
+
+<script>
+  /* ── FLOATING HEARTS ── */
+  const heartEmojis = ['💖','💕','🌸','💗','✨','🌷','💝','🐦','🎯','💘','🌟','💥'];
+  const bg = document.getElementById('hearts-bg');
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart-float';
+    h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (.8 + Math.random() * 1.4) + 'rem';
+    const dur = 6 + Math.random() * 8;
+    h.style.animationDuration = dur + 's';
+    h.style.animationDelay = Math.random() * 4 + 's';
+    bg.appendChild(h);
+    setTimeout(() => h.remove(), (dur + 4) * 1000);
+  }
+  setInterval(spawnHeart, 400);
+  for (let i = 0; i < 15; i++) spawnHeart();
+
+  /* ── SPARKLE CURSOR TRAIL ── */
+  const sparkles = ['✨','💖','🐦','⭐','💫','🎯','💥'];
+  document.addEventListener('mousemove', e => {
+    if (Math.random() > .6) return;
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+    s.style.left = e.clientX + 'px';
+    s.style.top  = e.clientY + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 800);
+  });
+
+  /* ── SCROLL FADE-IN FOR CARDS ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.style.opacity = '1';
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.wish-card, .reason-item').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+
+  /* ── NO BUTTON RUNS AWAY ── */
+  const taunts = [
+    "Even Angry Birds can't miss THIS shot! 🎯",
+    "The NO button flew away like a bird! 🐦💨",
+    "Nice try, but pigs can't win today! 🐷❌",
+    "Your beak says no but your eyes say YES 😤💖",
+    "The slingshot only has one direction — YES! 🎯",
+    "Angry Bird! Stop being difficult 😂💕",
+    "Every bird lands eventually… click YES! 🌸",
+    "No? That's not in the Angry Birds rulebook! 😏",
+  ];
+  let tauntIdx = 0;
+  function runAway() {
+    const btn = document.getElementById('no-btn');
+    const wrap = document.getElementById('btn-wrap');
+    const wRect = wrap.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const maxX = Math.min(vw - 120, wRect.width + 200);
+    const maxY = Math.min(vh - 80, 300);
+    const rx = (Math.random() - 0.5) * maxX;
+    const ry = (Math.random() - 0.5) * maxY;
+    btn.style.transform = `translate(${rx}px, ${ry}px)`;
+    btn.style.transition = 'transform .25s cubic-bezier(.22,1.5,.4,1)';
+    document.getElementById('no-taunt').textContent = taunts[tauntIdx % taunts.length];
+    tauntIdx++;
+  }
+
+  /* ── YES BUTTON ── */
+  function sayYes() {
+    document.getElementById('proposal').style.display = 'none';
+    const ys = document.getElementById('yes-screen');
+    ys.style.display = 'flex';
+    launchConfetti();
+    setTimeout(launchConfetti, 1500);
+    setTimeout(launchConfetti, 3000);
+  }
+
+  /* ── CONFETTI ── */
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const pieces = [];
+    const colors = ['#ff6b9d','#c56cd6','#ffd700','#ff3d7f','#fff','#a8edea'];
+    for (let i = 0; i < 180; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: 8 + Math.random() * 8,
+        h: 10 + Math.random() * 10,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 5,
+        vy: 2 + Math.random() * 4,
+        rot: Math.random() * 360,
+        rspeed: (Math.random() - 0.5) * 8,
+      });
+    }
+    let frame = 0;
+    function draw() {
+      if (frame++ > 200) { ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, 1 - frame/200);
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+        p.x += p.vx; p.y += p.vy; p.rot += p.rspeed;
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+</script>
+</body>
+</html>
