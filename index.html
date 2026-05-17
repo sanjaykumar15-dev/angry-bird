@@ -263,7 +263,6 @@
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      /* FIX: enough height so No button has room to escape without overlapping Yes */
       min-height: 160px;
       width: 100%;
       max-width: 500px;
@@ -295,9 +294,7 @@
       background: white;
       color: #aaa;
       box-shadow: 0 4px 14px rgba(0,0,0,.08);
-      /* FIX: absolute so it can escape without pushing Yes button */
       position: absolute;
-      /* Start at a safe offset below Yes so they don't overlap by default */
       top: 80px;
       left: 50%;
       transform: translateX(80px);
@@ -413,7 +410,6 @@
     ════════════════════════════════════ */
     @media (max-width: 600px) {
 
-      /* Hero */
       .hero-photo {
         width: 150px;
         height: 150px;
@@ -427,7 +423,6 @@
         padding: 8px 18px;
       }
 
-      /* Wishes */
       .cards-grid {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -436,31 +431,26 @@
         padding: 22px 18px;
       }
 
-      /* Gallery — 2 columns on mobile */
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
 
-      /* Reasons */
       .reason-item {
         border-radius: 20px;
         padding: 14px 18px;
         font-size: 0.9rem;
       }
 
-      /* Section titles */
       .section-title {
         font-size: clamp(1.4rem, 6vw, 2rem);
         margin-bottom: 24px;
       }
 
-      /* Sections padding */
       section {
         padding: 50px 16px;
       }
 
-      /* Proposal */
       .proposal-photo {
         width: 130px;
         height: 130px;
@@ -470,7 +460,6 @@
         padding: 0 8px;
       }
 
-      /* Button wrap — more vertical room for No to escape */
       .btn-wrap {
         min-height: 200px;
         max-width: 340px;
@@ -479,14 +468,12 @@
         padding: 14px 32px;
         font-size: 1rem;
       }
-      /* No button starts clearly below Yes on mobile */
       #no-btn {
         top: 90px;
         left: 50%;
         transform: translateX(40px);
       }
 
-      /* Yes screen photos */
       #yes-screen .hero-photo {
         width: 130px !important;
         height: 130px !important;
@@ -497,7 +484,6 @@
         gap: 10px;
       }
 
-      /* Music button smaller on mobile */
       .music-control {
         bottom: 1rem;
         right: 1rem;
@@ -508,7 +494,6 @@
         font-size: 1.4rem;
       }
 
-      /* Cake */
       .cake-wrap {
         font-size: 3.5rem;
       }
@@ -630,7 +615,7 @@
       <img src="./images/1 (10).jpg" alt="Memory 6"/>
       <div class="overlay">🦋</div>
     </div>
-       <div class="gallery-item">
+    <div class="gallery-item">
       <img src="./images/1 (11).jpg" alt="Memory 6"/>
       <div class="overlay">🦋</div>
     </div>
@@ -658,14 +643,26 @@
   <img class="proposal-photo"
        src="./images/1 (3).jpg"
        alt="Us Together"/>
-  <h2 class="proposal-q">So… on your birthday… 🥺</h2>
+
+  <!-- ✏️ UPDATED: heading -->
+  <h2 class="proposal-q">I just want to be honest with you… 🥺</h2>
+
+  <!-- ✏️ UPDATED: proposal message -->
   <p class="proposal-funny">
-    I googled "how to impress the most amazing girl" and it said
-    <strong>"just be honest"</strong> — so here goes nothing 😅💖<br><br>
-    Will you be <strong>Mine</strong> cutie pie? 🌹
+    I really like you. Like, <em>really</em> really like you. 😅💖<br><br>
+    I always want to make you feel happy — your smile genuinely
+    makes my whole day so much better.<br><br>
+    I'm not saying "let's plan everything right now" 😂 — I'm just saying…
+    it would be <strong>really amazing</strong> if we could be together
+    someday in the future. 🌸<br><br>
+    This is just me sharing what I feel for you, honestly &amp; from the heart. 💌<br><br>
+    So tell me, Angry Bird… 🐦<br>
+    <strong>Do you like me too?</strong> 🙈
   </p>
+
   <div class="btn-wrap" id="btn-wrap">
-    <button class="btn" id="yes-btn" onclick="sayYes()">Yes, Obviously! 💖</button>
+    <!-- ✏️ UPDATED: yes button label -->
+    <button class="btn" id="yes-btn" onclick="sayYes()">Yes, I do! 💖</button>
     <button class="btn" id="no-btn" onmouseenter="runAway()" ontouchstart="runAway()">No 😅</button>
   </div>
   <p id="no-taunt" style="margin-top:20px;color:#c56cd6;font-family:'Dancing Script',cursive;font-size:1.2rem;min-height:30px;"></p>
@@ -675,8 +672,13 @@
 <section id="yes-screen">
   <canvas class="confetti-burst" id="confetti-canvas"></canvas>
   <div class="cake-wrap">🥳</div>
-  <h2 class="yes-title">YAY! She Said YES!! 🎉</h2>
-  <p class="yes-subtitle">I knew it! I knew it! The smartest decision of your life! 😜💖</p>
+
+  <!-- ✏️ UPDATED: yes screen title -->
+  <h2 class="yes-title">She Likes Me Back!! 🎉💖</h2>
+
+  <!-- ✏️ UPDATED: yes screen subtitle -->
+  <p class="yes-subtitle">See? I knew it. My heart never lies. 😌✨</p>
+
   <br>
   <div style="display: flex;">
     <img class="hero-photo"
@@ -686,11 +688,18 @@
          src="./images/1 (2).jpg"
          alt="My Queen" style="width:180px;height:180px;border-color:#ffd700;"/>
   </div>
+
+  <!-- ✏️ UPDATED: funny romantic line -->
   <p style="margin-top:22px;font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--lilac)">
-    You are MY person. Forever &amp; Always. 🌹
+    If you like me… then you must love me. 😏🌹<br>
+    <span style="font-size:1.15rem;">Science says so. Can't argue with science. 🧪💕</span>
   </p>
-  <p style="margin-top:10px;font-size:1rem;color:#b98daa;max-width:420px;text-align:center;line-height:1.7">
-    From this birthday onwards, every single day is going to be even more magical because we are official! 💫🎀
+
+  <!-- ✏️ UPDATED: closing message -->
+  <p style="margin-top:10px;font-size:1rem;color:#b98daa;max-width:440px;text-align:center;line-height:1.8">
+    Okay but seriously — thank you for giving me a chance. 🥺<br>
+    I promise to always make you smile, keep you happy,<br>
+    and never ever make you regret saying yes to this idiot. 😂💖
   </p>
 </section>
 
@@ -743,14 +752,14 @@
     createSparkle(e.clientX, e.clientY);
   });
 
-  // Mobile touch — FIX: listen to touchmove for continuous trail
+  // Mobile touch — listen to touchmove for continuous trail
   document.addEventListener('touchmove', e => {
-    if (Math.random() > .5) return; // slightly more frequent on touch
+    if (Math.random() > .5) return;
     const touch = e.touches[0];
     createSparkle(touch.clientX, touch.clientY);
   }, { passive: true });
 
-  // Also spawn a sparkle on tap/touchstart for instant feedback
+  // Spawn a sparkle on tap/touchstart for instant feedback
   document.addEventListener('touchstart', e => {
     const touch = e.touches[0];
     createSparkle(touch.clientX, touch.clientY);
@@ -789,7 +798,7 @@
     const maxY = Math.min(wRect.height - 90, 100);
 
     const rx = (Math.random() - 0.5) * 2 * maxX;
-    const ry = 60 + Math.random() * maxY; // always stay below yes-btn
+    const ry = 60 + Math.random() * maxY;
 
     btn.style.left  = '50%';
     btn.style.transform = `translate(calc(-50% + ${rx}px), ${ry}px)`;
